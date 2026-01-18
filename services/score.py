@@ -35,9 +35,9 @@ def compute_fit_score(jd_text: str, resume_text: str, top_n: int = 25) -> Dict:
 
     coverage = (len(present) / max(1, len(top_keywords)))  # 0..1
 
-    # Simple scoring:
-    # - Coverage (0..80)
-    # - Bonus if resume contains standard headings (0..20)
+    # Scoring:
+    #  Coverage (0..80)
+    #  Bonus if resume contains standard headings (0..20)
     bonus = 0
     headings = ["summary", "skills", "experience", "education", "projects"]
     bonus += 4 * sum(1 for h in headings if h in res_lower)  # max 20
@@ -52,4 +52,5 @@ def compute_fit_score(jd_text: str, resume_text: str, top_n: int = 25) -> Dict:
         "coverage_ratio": round(coverage, 3),
         "heading_bonus": bonus,
     }
+
 
