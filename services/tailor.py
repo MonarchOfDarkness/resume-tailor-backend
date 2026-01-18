@@ -43,7 +43,7 @@ RESUME:
 
     text = (resp.text or "").strip()
 
-    # Parse JSON robustly
+    # Parse JSON
     try:
         data = json.loads(text)
     except Exception:
@@ -55,3 +55,4 @@ RESUME:
         "change_log": [str(x).strip() for x in data.get("change_log", []) if str(x).strip()] if isinstance(data.get("change_log"), list) else [],
         "suggestions": [str(x).strip() for x in data.get("suggestions", []) if str(x).strip()] if isinstance(data.get("suggestions"), list) else [],
     }
+
