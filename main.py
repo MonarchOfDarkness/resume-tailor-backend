@@ -15,7 +15,7 @@ from services.docx_export import export_docx_bytes
 
 app = FastAPI()
 
-# CORS: for your Vercel frontend later
+# CORS: Vercel frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # tighten later
@@ -99,7 +99,7 @@ def export(req: ExportRequest, request: Request):
     out_path = EXPORTS_DIR / f"{uuid.uuid4()}_{req.filename}"
     out_path.write_bytes(data)
 
-    # For now: return local path (we'll switch to cloud storage later)
+    # For now: return local path (switch to cloud storage later)
     base = str(request.base_url).rstrip("/")
     return {
     "saved_to": str(out_path),
@@ -118,3 +118,4 @@ def download(filename: str):
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         filename=filename,
     )
+
